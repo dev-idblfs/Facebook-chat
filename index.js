@@ -52,7 +52,7 @@ app.post('/webhook', (req, res) => {
     let body = req.body;
     
     // Check the webhook event is from a Page subscription
-    if (body.object === 'page') {
+    if (body.object === 'user') {
         console.log('STEP 2 APP');
     
         body.entry.forEach(function (entry) {
@@ -151,7 +151,7 @@ function handlePostback(sender_psid, received_postback) {
 }
 
 function callSendAPI(sender_psid, response) {
-    let access_token = '';
+    let access_token = 'EAAI87J7KpbYBAP55ts5dQlidb4zverFxFCEyJAz2Ha1dpn8JZAidf2iFyZA7fovO3peTyyfWIOuZAPS6tvFvL1vAbkPdwLhJQj6Yce9dYvZBBCl6q8UN7FBllxPTNOUestBbaKMCrMWg2Is10yMMPdRfQ4LjUSRFX0CtjfLJ7FuCkr8WQvKTzANSNGPmuwHrWc1FbTZCdcQZDZD';
     // Construct the message body
     let request_body = {
         "recipient": {
