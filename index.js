@@ -12,7 +12,7 @@ app.get('/', (req, res) => {
     res.sendStatus(200);
 });
 
-let VERIFY_TOKEN = "EAAI87J7KpbYBAIpMUP7Qv4kj0ttbHaEYtr8cSdStQ3NIEnxnAZCAZA9apHzjJDWDRYzwD8OZBJZAH8JBzLGAbbIebi4YmZBzwpGz4PfnTs7xjyztjdf2QETCCFLOUFh2BLc3T3RhOAmpYoqwYw2b8knDfLkSxBgRl6mHIr84l6ohKTT340ERI"
+let VERIFY_TOKEN = "qwertyuiopasdfghjklzxcvbnm1234567890"
 
 app.get('/webhook', (req, res) => {
 
@@ -151,7 +151,7 @@ function handlePostback(sender_psid, received_postback) {
 }
 
 function callSendAPI(sender_psid, response) {
-    let access_token
+    let access_token = '';
     // Construct the message body
     let request_body = {
         "recipient": {
