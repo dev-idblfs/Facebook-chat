@@ -12,12 +12,12 @@ app.get('/', (req, res) => {
     res.sendStatus(200);
 });
 
-let VERIFY_TOKEN = "EAAI87J7KpbYBAIpMUP7Qv4kj0ttbHaEYtr8cSdStQ3NIEnxnAZCAZA9apHzjJDWDRYzwD8OZBJZAH8JBzLGAbbIebi4YmZBzwpGz4PfnTs7xjyztjdf2QETCCFLOUFh2BLc3T3RhOAmpYoqwYw2b8knDfLkSxBgRl6mHIr84l6ohKTT340ERI"
+let VERIFY_TOKEN = "qwertyuiopasdfghjklzxcvbnm1234567890";
 
 app.get('/webhook', (req, res) => {
 
     // Your verify token. Should be a random string.
-
+    console.log('start');
     // Parse the query params
     let mode = req.query['hub.mode'];
     let token = req.query['hub.verify_token'];
@@ -25,7 +25,8 @@ app.get('/webhook', (req, res) => {
 
     // Checks if a token and mode is in the query string of the request
     if (mode && token) {
-
+        console.log('mode and token found');
+    
         // Checks the mode and token sent is correct
         if (mode === 'subscribe' && token === VERIFY_TOKEN) {
 
@@ -45,12 +46,12 @@ app.post('/webhook', (req, res) => {
 
     // Parse the request body from the POST
     let body = req.body;
-
+    console.log('entered');
     // Check the webhook event is from a Page subscription
     if (body.object === 'page') {
-
+        console.log('mode and token found');
         body.entry.forEach(function (entry) {
-
+            console.log('message found');
             // Gets the body of the webhook event
             let webhook_event = entry.messaging[0];
             console.log(webhook_event);
@@ -71,6 +72,7 @@ app.post('/webhook', (req, res) => {
 
         });
         // Return a '200 OK' response to all events
+        console.log('eventrecided but not run');
         res.status(200).send('EVENT_RECEIVED');
 
     } else {
@@ -141,6 +143,7 @@ function handlePostback(sender_psid, received_postback) {
 }
 
 function callSendAPI(sender_psid, response) {
+    let access_token='';
     // Construct the message body
     let request_body = {
         "recipient": {
@@ -152,7 +155,7 @@ function callSendAPI(sender_psid, response) {
     // Send the HTTP request to the Messenger Platform
     request({
         "uri": "https://graph.facebook.com/v2.6/me/messages",
-        "qs": { "access_token": VERIFY_TOKEN },
+        "qs": { "access_token": access_token },
         "method": "POST",
         "json": request_body
     }, (err, res, body) => {
