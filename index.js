@@ -11,6 +11,8 @@ app.get('/', (req, res) => {
     console.log('working');
     res.sendStatus(200);
 });
+app.use(bodyParser.json());
+
 
 let VERIFY_TOKEN = "qwertyuiopasdfghjklzxcvbnm1234567890";
 
@@ -50,6 +52,7 @@ app.post('/webhook', (req, res) => {
     // Check the webhook event is from a Page subscription
     if (body.object === 'page') {
         console.log('mode and token found');
+        
         body.entry.forEach(function (entry) {
             console.log('message found');
             // Gets the body of the webhook event
