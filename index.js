@@ -2,13 +2,12 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
+bodyParser.urlencoded();
 const app = express().use(bodyParser.json());
 
 app.listen(process.env.PORT || 1337, () => console.log("server is running...@ " + process.env.PORT));
 
 // Adds support for GET requests to our webhook
-bodyParser.urlencoded();
-app.use(bodyParser.json());
 app.get('/', (req, res) => {
     console.log('working');
     res.sendStatus(200);
