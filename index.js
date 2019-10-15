@@ -7,12 +7,12 @@ const app = express().use(bodyParser.json());
 app.listen(process.env.PORT || 1337, () => console.log("server is running...@ " + process.env.PORT));
 
 // Adds support for GET requests to our webhook
+bodyParser.urlencoded();
+app.use(bodyParser.json());
 app.get('/', (req, res) => {
     console.log('working');
     res.sendStatus(200);
 });
-app.use(bodyParser.json());
-
 
 let VERIFY_TOKEN = "qwertyuiopasdfghjklzxcvbnm1234567890";
 
@@ -52,6 +52,7 @@ app.post('/webhook', (req, res) => {
     // Check the webhook event is from a Page subscription
     if (body.object === 'page') {
         console.log('mode and token found');
+        console.log(JSON.stringify(body.entry));
         
         body.entry.forEach(function (entry) {
             console.log('message found');
