@@ -33,12 +33,16 @@
             js.src = "https://connect.facebook.net/en_US/sdk.js";
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
-
+    </script>
+    <script defer='defer'>
+        FB.getLoginStatus(function (response) {
+            console.log(response);
+        });
     </script>
     <h1>Facebook</h1>
 
 
-    <fb:login-button
+    <fb:login-button id="loginbutton"
         scope="public_profile,email,manage_pages,pages_show_list,pages_messaging_subscriptions,pages_messaging"
         onlogin="checkLoginState();">
     </fb:login-button>
